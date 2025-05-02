@@ -6,7 +6,7 @@ import IconButton from "./icon-button";
 import { Expand, ShoppingCart } from "lucide-react";
 import Currency from "./currency";
 import { useRouter } from "next/navigation";
-import PreviewModal from "../Preview-modal";
+
 import usePreviewModal from "@/app/hooks/use-preview-modal";
 import { MouseEventHandler } from 'react';
 import useCart from "@/app/hooks/use-cart";
