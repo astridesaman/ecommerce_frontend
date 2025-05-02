@@ -3,17 +3,15 @@
 import Container from "../components/ui/container";
 import Billboard from "../components/Billboard";
 import ProductList from "../components/Products-list";
-import { fetchProducts } from "@/actions/get-products"; 
 import { useState, useEffect } from "react";
 
 const HomePage = () => {
-    const [products, setProducts] = useState([]);
+    const [products] = useState([]);
 
     useEffect(() => {
         const loadProducts = async () => {
             try {
-                const data = await fetchProducts();
-                setProducts(data);
+                console.log("test")
             } catch (error) {
                 console.error("Erreur lors de la récupération des produits:", error);
             }
