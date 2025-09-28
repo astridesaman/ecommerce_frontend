@@ -1,73 +1,92 @@
-## **🌱 ePacific**
+# 🌱 ePacific
 
 Plateforme e-commerce éco-responsable avec personnalisation et espace communautaire
+
+---
 
 ## 🚀 Présentation
 
 ePacific est une plateforme e-commerce innovante, mettant en avant des produits éco-responsables et offrant une expérience utilisateur unique grâce à :
+- une personnalisation IA (recommandations, customisation de produits)
+- un espace communautaire favorisant l’inclusion des créateurs
+- un parcours d’achat optimisé et durable
 
-- une personnalisation IA (recommandations, customisation de produits),
-
-- un espace communautaire favorisant l’inclusion des créateurs,
-
-- un parcours d’achat optimisé et durable.
+---
 
 ## 📋 Fonctionnalités principales
+
 ### 🛍️ Expérience e-commerce
 
-✅ Catalogue produit avec filtres dynamiques (prix, impact écologique, marque, catégorie).
+- Catalogue produit avec filtres dynamiques (prix, impact écologique, marque, catégorie)
+- Recherche intelligente (suggestions, auto-complétion)
+- Panier & paiement sécurisé
+- Wishlist intelligente : alertes prix & stock, recommandations associées
+- Suivi de commande & retours simplifiés
 
-✅ Recherche intelligente (suggestions, auto-complétion, recherche sémantique).
+### 🤖 Personnalisation IA
 
-✅ Panier & paiement sécurisé (Stripe, PayPal, Apple Pay).
+- Recommandations personnalisées (historique, préférences, durabilité)
+- Customisation produit (textile, mugs, accessoires)
+- Chatbot / conseiller éthique (guidage vers des choix éco-responsables)
 
-✅ Wishlist intelligente : alertes prix & stock, recommandations associées.
+### 🌍 Communauté & marketplace
 
-✅ Suivi de commande & retours simplifiés.
+- Espace communautaire : posts, discussions, avis enrichis
+- Marketplace créateurs : vendre/acheter des produits uniques
+- Système de badges & gamification (impact écologique, fiabilité vendeur)
 
-## 🤖 Personnalisation IA
+---
 
-🔹 Recommandations personnalisées (historique, préférences, durabilité).
+## 🛠️ Stack technique utilisée
 
-🔹 Customisation produit (textile, mugs, accessoires).
-
-🔹 Chatbot / conseiller éthique (guidage vers des choix éco-responsables).
-
-## 🌍 Communauté & marketplace
-
-🔹 Espace communautaire : posts, discussions, avis enrichis.
-
-🔹 Marketplace créateurs : vendre/acheter des produits uniques.
-
-🔹 Système de badges & gamification (impact écologique, fiabilité vendeur).
-
-## 🛠️ Stack technique
 ### Frontend
 
-- *Framework* : React.js / Next.js 15 (Server Components + App Router).
+- **Framework** : Next.js 15 (App Router, Server Components)
+- **Langage** : TypeScript
+- **UI/Design** : Tailwind CSS, ShadCN UI
+- **Gestion d’état** : Zustand
+- **Authentification & Sécurité** : OAuth2 (SSO, social logins, gestion des rôles), JWT
+- **Appels API** : REST (via `lib/api.ts`)
+- **Mock de données** : mockProducts.ts
 
-- *UI/Design* : Tailwind CSS, ShadCN UI, Framer Motion.
+### Paiement & Logistique
 
-- *Gestion d’état* : Zustand (global store) + React Query / Apollo pour data-fetching.
+- (À intégrer) Stripe, PayPal, API transporteurs
 
-- *Authentification & Sécurité*
+### SEO & Analytics
 
-- *Auth0* (SSO, social logins, gestion des rôles).
+- **SEO** : Next.js (ISR/SSR)
+- **Analytics** : (À intégrer) Google Analytics, LogRocket, PostHog
 
-- *JWT*  pour communication sécurisée avec le backend.
+---
 
-## Paiement & Logistique
+## ▶️ Lancer le projet en local
 
-- *Stripe* (cartes, Apple Pay, Google Pay).
+```bash
+npm install
+npm run dev
+```
 
-- *PayPal* (option secondaire).
+Le projet sera accessible sur [http://localhost:3000](http://localhost:3000).
 
-- *Intégration API transporteurs* (La Poste, DHL, Mondial Relay).
+---
 
-- *API & Données*
+## 📁 Structure du projet
 
-## Backend API : REST / GraphQL (Apollo Client).
+```
+src/
+  app/
+    components/
+    hooks/
+    lib/
+    context/
+    (routes)/
+    public/
+    globals.css
+    layout.tsx
+```
+---
 
-- *Optimisation SEO* : Next.js (ISR + SSR).
+## 📄 Licence
 
-- *Analytics* : Google Analytics, LogRocket, PostHog (event tracking).
+Ce projet est sous licence MIT.
