@@ -1,4 +1,5 @@
 import { getUsers } from "../lib/api";
+import type { User } from "../lib/api";
 
 export default async function ProfilePage() {
   const users = await getUsers();
@@ -7,7 +8,7 @@ export default async function ProfilePage() {
     <div className="p-6">
       <h1 className="text-xl font-bold">Utilisateurs</h1>
       <ul>
-        {users.map((u: any) => (
+        {users.map((u: User) => (
           <li key={u.id}>{u.email}</li>
         ))}
       </ul>

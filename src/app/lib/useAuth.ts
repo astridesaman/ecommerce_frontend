@@ -2,6 +2,7 @@
 
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
+import type { User } from "./api"; // On réutilise le type User défini plus haut
 
 export function useAuth() {
   const context = useContext(AuthContext);
@@ -22,7 +23,7 @@ export function useAuth() {
     }
   }, [token, contextLogin]);
 
-  const login = async (newToken: string, userData?: any) => {
+  const login = async (newToken: string, userData?: User) => {
     if (userData) {
       localStorage.setItem("user", JSON.stringify(userData));
     }

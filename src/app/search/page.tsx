@@ -3,6 +3,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { mockProducts } from "../lib/mockProducts";
+import Image from "next/image";
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
@@ -33,9 +34,11 @@ const SearchPage = () => {
               key={p.id}
               className="border rounded-lg p-4 shadow hover:shadow-lg transition"
             >
-              <img
+              <Image
                 src={p.image}
                 alt={p.name}
+                width={400}
+                height={160}
                 className="w-full h-40 object-cover rounded"
               />
               <h2 className="mt-2 font-semibold">{p.name}</h2>

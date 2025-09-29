@@ -4,18 +4,19 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../lib/useAuth";
 import Link from "next/link";
+import type { User } from "../../lib/api";
 
 const RegisterPage = () => {
   const router = useRouter();
   const { login } = useAuth();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -28,13 +29,17 @@ const RegisterPage = () => {
       });
 
       if (res.ok) {
-        const user = await res.json();
+        const user: User = await res.json();
         setSuccess("Compte créé avec succès 🎉");
         login(localStorage.getItem("token") || "", user);
         setTimeout(() => router.push("/"), 1500);
       } else {
-        const err = await res.json();
-        setError(err.detail || "Inscription échouée");
+        const err: { detail?: string | { msg: string }[] } = await res.json();
+        if (Array.isArray(err.detail)) {
+          setError(err.detail.map((d) => d.msg).join(", "));
+        } else {
+          setError(typeof err.detail === "string" ? err.detail : "Inscription échouée");
+        }
       }
     } catch {
       setError("Erreur de connexion au serveur");

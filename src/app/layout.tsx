@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={urban.className}>
         <ModalProvider />
         <ToastProvider />
-        <AuthProvider>   {/* ✅ encapsule ici */}
+        <AuthProvider> 
           <Navbar />
           {children}
           <Footer />

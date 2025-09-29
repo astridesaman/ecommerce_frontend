@@ -27,7 +27,7 @@ const HomePage = () => {
                     data={{ 
                         id: '1ed54d58-f16f-420e-8750-9c9cccdeedb3', 
                         label: 'Welcome to our store', 
-                        imageUrl: 'https://source.unsplash.com/1600x900/?fashion' 
+                        imageUrl: 'https://images.unsplash.com/photo-1609320552296-3e2bd42ee3ea?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
                     }} 
                 />
                 <div className="flex flex-col px-4 gap-y-8 sm:px-6 lg:px-8">
