@@ -29,6 +29,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (savedToken) {
       setToken(savedToken);
       fetchUser(savedToken);
+      fetchUserProfile(savedToken);
+
     }
   }, []);
 
@@ -49,6 +51,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       logout();
     }
   };
+
+  const fetchUserProfile = async (token: string) => {
+  try {
+    const res = await fetch("http://localhost:8000/profile", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error("Impossible de récupérer le profil");
+    const data = await res.json();
+    setUser(data);
+    localStorage.setItem("user", JSON.stringify(data));
+  } catch (err) {
+    console.error(err);
+    logout();
+  }
+};
+
 
   const login = async (newToken: string) => {
     localStorage.setItem("token", newToken);
