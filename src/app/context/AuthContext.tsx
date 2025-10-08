@@ -15,6 +15,7 @@ interface AuthContextType {
   token: string | null;
   login: (token: string) => Promise<void>;
   logout: () => void;
+  setUser: (user: User | null) => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -23,14 +24,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  // Charger token et user côté client uniquement
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
+    const savedUser = localStorage.getItem("user");
+
     if (savedToken) {
       setToken(savedToken);
-      fetchUser(savedToken);
-      fetchUserProfile(savedToken);
-
+      if (savedUser) {
+        setUser(JSON.parse(savedUser));
+      } else {
+        fetchUser(savedToken);
+      }
     }
   }, []);
 
@@ -39,34 +43,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const res = await fetch("http://localhost:8000/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data);
-      } else {
-        // Token invalide ou expiré
+
+      if (!res.ok) {
         logout();
+        return;
       }
+
+      const data = await res.json();
+      setUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
     } catch (error) {
       console.error("Erreur récupération user", error);
       logout();
     }
   };
-
-  const fetchUserProfile = async (token: string) => {
-  try {
-    const res = await fetch("http://localhost:8000/profile", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (!res.ok) throw new Error("Impossible de récupérer le profil");
-    const data = await res.json();
-    setUser(data);
-    localStorage.setItem("user", JSON.stringify(data));
-  } catch (err) {
-    console.error(err);
-    logout();
-  }
-};
-
 
   const login = async (newToken: string) => {
     localStorage.setItem("token", newToken);
@@ -76,12 +66,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setToken(null);
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout, setUser }}>
       {children}
     </AuthContext.Provider>
   );

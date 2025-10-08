@@ -4,9 +4,12 @@ import Container from "../components/ui/container";
 import Billboard from "../components/Billboard";
 import ProductList from "../components/Products-list";
 import { useState, useEffect } from "react";
+import { mockProducts } from "../lib/mockProducts";
 
 const HomePage = () => {
     const [products] = useState([]);
+    const mockproducts = mockProducts;
+
 
     useEffect(() => {
         const loadProducts = async () => {
@@ -32,6 +35,7 @@ const HomePage = () => {
                 />
                 <div className="flex flex-col px-4 gap-y-8 sm:px-6 lg:px-8">
                     <ProductList title="Featured Products" items={products} />
+                    {/* <ImageList title="Produits en mock" items={mockproducts} /> */}
                 </div>
             </div>
         </Container>

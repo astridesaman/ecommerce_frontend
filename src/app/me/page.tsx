@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { User, Mail, LogOut, Save, AlertCircle, CheckCircle } from "lucide-react";
 
 const ProfilePage = () => {
-  const { user, token, logout } = useAuth();
+  const { user, token, logout, setUser } = useAuth(); // 👈 on récupère setUser
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -37,7 +37,7 @@ const ProfilePage = () => {
     
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/profile", {
+      const res = await fetch("http://localhost:8000/me", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,11 @@ const ProfilePage = () => {
       });
 
       if (res.ok) {
+        const updatedUser = await res.json();
+        setUser(updatedUser); // 👈 met à jour le contexte
+        localStorage.setItem("user", JSON.stringify(updatedUser)); // 👈 synchro localStorage
         showNotification("success", "Profil mis à jour avec succès");
+
       } else {
         const data = await res.json();
         showNotification("error", data.detail || "Une erreur est survenue");

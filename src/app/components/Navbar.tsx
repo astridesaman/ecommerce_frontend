@@ -87,7 +87,7 @@ const Navbar = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <Link
-                  href="/profile"
+                  href="/me"
                   className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors font-medium text-gray-900"
                 >
                   <User className="w-5 h-5" />
@@ -168,7 +168,7 @@ const Navbar = () => {
               </Link>
             ) : (
               <>
-                <MobileNavLink href="/profile" onClick={closeMobileMenu} icon={<User className="w-5 h-5" />}>
+                <MobileNavLink href="/me" onClick={closeMobileMenu} icon={<User className="w-5 h-5" />}>
                   {user.first_name || "Profil"}
                 </MobileNavLink>
                 <button
